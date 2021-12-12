@@ -1,0 +1,15 @@
+pred,image_path,pred_class
+1,random_images/lichen2.jpeg,herpes_simplex
+0,random_images/acne3.jpeg,acne
+0,random_images/acne2.jpeg,acne
+1,random_images/herpes2.jpeg,herpes_simplex
+2,random_images/lichen3.jpg,lichen_planus
+1,random_images/herpes.jpeg,herpes_simplex
+1,random_images/acne.jpeg,herpes_simplex
+0,random_images/lichen4.jpeg,acne
+2,random_images/lichen1.jpeg,lichen_planus
+1,random_images/herpes3.jpeg,herpes_simplex
+1,random_images/herpes4.webp,herpes_simplex
+0,random_images/acne4.jpeg,acne
+2,random_images/lichen.jpeg,lichen_planus
+1,random_images/herpes1.jpeg,herpes_simplex

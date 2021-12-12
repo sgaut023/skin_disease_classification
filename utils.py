@@ -129,7 +129,7 @@ def visualize_loss(train_loss, test_loss):
     plt.legend()
     plt.show()
 
-def evaluate_model(network, testloader, loss_function, device):
+def evaluate_model(network, testloader, loss_function, device=None):
     """
     Evaluates trained model using test set
 
@@ -144,11 +144,12 @@ def evaluate_model(network, testloader, loss_function, device):
         y_true (list): list of labels
 
     """   
-    correct, total = 0, 0
+    network.eval()
     with torch.no_grad():
         y_pred = []
         y_true = []
-        for i, data in enumerate(testloader, 0):
+        losses= []
+        for _, data in enumerate(testloader, 0):
             inputs, targets = data
             inputs = inputs.to(device)
             targets = targets.to(device)
@@ -157,7 +158,8 @@ def evaluate_model(network, testloader, loss_function, device):
             _, predicted = torch.max(outputs.data, 1)
             y_pred.extend(predicted.cpu().numpy())
             y_true.extend(targets.cpu().numpy())
-    return loss, y_pred, y_true
+            losses.append(loss.cpu().numpy())
+    return np.array(losses).mean(), y_pred, y_true
 
 def save_results(results, fold, y_pred, y_true):  
     """
@@ -216,6 +218,7 @@ def train_model(name, dataset, k_folds =5, num_epochs =15, lr =1e-4, random_stat
         train_loss = []
         test_loss= []
         for epoch in range(0, num_epochs):
+            network.train()
             current_loss = 0.0
             # Iterate over the DataLoader for training data
             for i, data in enumerate(trainloader, 0):
@@ -231,15 +234,15 @@ def train_model(name, dataset, k_folds =5, num_epochs =15, lr =1e-4, random_stat
 
                 # Print statistics
                 current_loss += loss.item()
-        train_loss.append(current_loss/(i+1))
-        loss, y_pred, y_true = evaluate_model(network,testloader, loss_function)
-        test_loss.append(loss.item())
-        print(f'Epoch {epoch+1}-- Train Loss:{current_loss/(i+1)}, Test Loss: {loss}')
+            train_loss.append(current_loss/(i+1))
+            loss, y_pred, y_true = evaluate_model(network,testloader, loss_function, device)
+            test_loss.append(loss.item())
+            print(f'Epoch {epoch+1}-- Train Loss:{current_loss/(i+1)}, Test Loss: {loss}')
 
         visualize_loss(train_loss, test_loss) 
         get_confusion_matrix(y_true, y_pred)
         print('Starting testing')
-        loss, y_pred, y_true = evaluate_model(network,testloader, loss_function)
+        loss, y_pred, y_true = evaluate_model(network,testloader, loss_function,device)
         save_results(results, fold, y_pred, y_true)
 
     total_time = time.time() - start_time
@@ -333,9 +336,33 @@ def get_model(name):
         plt.close('all')
         ll_net = sn_LinearLayer(num_classes=3, n_coefficients=81, M_coefficient=100, N_coefficient=100)
         network = sn_HybridModel(scatteringBase=scatteringBase, top=ll_net ) 
+        print('Paramatric Scattering Network Created')
     else: 
         NotImplemented(f"Model Architecture {name} not implemented")
     return network
+
+class UnNormalize(object):
+    """
+    Unnormalize tensor images
+    Returns:
+        tensor: unormalized tensor
+    """   
+    #function from: https://discuss.pytorch.org/t/simple-way-to-inverse-transform-normalization/4821/2
+    def __init__(self, mean, std):
+        self.mean = mean
+        self.std = std
+
+    def __call__(self, tensor):
+        """
+        Args:
+            tensor (Tensor): Tensor image of size (C, H, W) to be normalized.
+        Returns:
+            Tensor: Normalized image.
+        """
+        for t, m, s in zip(tensor, self.mean, self.std):
+            t.mul_(s).add_(m)
+            # The normalize code -> t.sub_(m).div_(s)
+        return tensor
 
 
 
