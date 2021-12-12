@@ -17,9 +17,9 @@ To create the `oro` conda environment, enter the following in the command prompt
 ```
 conda env create -f environment.yml
 ```
-To active the `oro` conda environment, enter the following: 
+To active the `oro_health` conda environment, enter the following: 
 ```
-conda activate oro
+conda activate oro_health
 ```
 Datasets
 ------------
