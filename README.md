@@ -34,6 +34,9 @@ Challenge 2: **Efficient learning from limited labeled data**. One of the key ch
 
 Challenge 3: **Finding disentangled representations**. A crucial element in extracting information features from high dimensional structured data is the disentanglement of sources of variations in the data. We observe a lot of intra-class variation. Let’s visualize some of the images.
 
+
+The images are taken from http://www.danderm-pdv.is.kkh.dk/atlas/index.html with their permission to use for this technical test. 
+
 Architectures
 ------------
 We consider four different architectures:
