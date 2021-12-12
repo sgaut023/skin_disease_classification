@@ -46,11 +46,14 @@ In notebook [2.0.HyperParameterSearch.ipynb](https://github.com/sgaut023/skin_di
 
 Training and Saving Model
 ------------
-In notebook [3.0.TrainEval.ipynb (https://github.com/sgaut023/skin_disease_classification/blob/main/3.0.TrainEval.ipynb), we train the final model using the best combination of hyperparameters found in the second notebook. The state dictionary of the final [BiT](https://arxiv.org/abs/1912.11370) model is saved [here](https://github.com/sgaut023/skin_disease_classification/tree/main/trained_models).
+In notebook [3.0.TrainEval.ipynb](https://github.com/sgaut023/skin_disease_classification/blob/main/3.0.TrainEval.ipynb), we train the final model using the best combination of hyperparameters found in the second notebook. The state dictionary of the final [BiT](https://arxiv.org/abs/1912.11370) model is saved [here](https://github.com/sgaut023/skin_disease_classification/tree/main/trained_models). The confusion matrix and classification report of the final trained model is shown below.
+
+![image](https://user-images.githubusercontent.com/23482039/145730755-f69f76ce-6826-4e77-b482-2fd62ed8a9e7.png)
+
 
 Inference
 ------------
-If you want to use the trained model to infer on unseen images, please run notebook [34.0.Inference.ipynb](https://github.com/sgaut023/skin_disease_classification/blob/main/4.0.Inference.ipynb). The new images need to be in the [random_images/](https://github.com/sgaut023/skin_disease_classification/tree/main/random_images) folder. The predictions are saved in the predictions.csv file. 
+If you want to use the trained model to infer unseen images, please run notebook [34.0.Inference.ipynb](https://github.com/sgaut023/skin_disease_classification/blob/main/4.0.Inference.ipynb). The new images need to be in the [random_images/](https://github.com/sgaut023/skin_disease_classification/tree/main/random_images) folder. The predictions are saved in the predictions.csv file. 
 
 Experimental Tracking Tool
 ------
