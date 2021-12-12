@@ -1,5 +1,6 @@
 import torch
 from sklearn.model_selection import StratifiedKFold
+from torchvision import transforms
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from models import Net, Resnet50
@@ -18,6 +19,39 @@ import timm
 from kymatio_mod.parametricSN.models.sn_base_models import sn_ScatteringBase
 from kymatio_mod.parametricSN.models.sn_top_models import sn_LinearLayer
 from kymatio_mod.parametricSN.models.sn_hybrid_models import sn_HybridModel
+
+
+def augmentationFactory(augmentation):
+    """
+       Created torchvision transforms object.
+       For this experiment, we are only doing random flip as a data augmentation.
+       The images are normalized. 
+
+    Args:
+        augmentation (str): augmentation name (augment or noaugment)
+
+    Returns:
+        torchvision.transforms: torchvision transforms object
+    """ 
+    
+    if augmentation == 'augment':
+        transform = [
+            transforms.Resize((400,400)),
+            transforms.RandomHorizontalFlip(),
+        ]
+
+    elif augmentation == 'noaugment':
+        transform = [
+        transforms.Resize((400,400)),
+        ]
+
+    else: 
+        NotImplemented(f"augment parameter {augmentation} not implemented")
+
+    normalize = transforms.Normalize(mean=[0.6475, 0.4907, 0.4165],
+                                     std=[0.1875, 0.1598, 0.1460])
+
+    return transforms.Compose(transform + [transforms.ToTensor(), normalize])       
 
 def get_loaders(dataset, train_ids, test_ids, batch_size):
     """
