@@ -56,7 +56,7 @@ In notebook [3.0.TrainEval.ipynb](https://github.com/sgaut023/skin_disease_class
 
 Inference
 ------------
-If you want to use the trained model to infer unseen images, please run notebook [34.0.Inference.ipynb](https://github.com/sgaut023/skin_disease_classification/blob/main/4.0.Inference.ipynb). The new images need to be in the [random_images/](https://github.com/sgaut023/skin_disease_classification/tree/main/random_images) folder. The predictions are saved in the predictions.csv file. 
+If you want to use the trained model to infer unseen images, please run notebook [4.0.Inference.ipynb](https://github.com/sgaut023/skin_disease_classification/blob/main/4.0.Inference.ipynb). The new images need to be in the [random_images/](https://github.com/sgaut023/skin_disease_classification/tree/main/random_images) folder. The predictions are saved in the predictions.csv file. 
 
 Experimental Tracking Tool
 ------
