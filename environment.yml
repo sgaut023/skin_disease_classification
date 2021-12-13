@@ -21,7 +21,6 @@ dependencies:
 - ipywidgets
 - pip:
   - timm
-  - gwpy
   - seaborn
   - opencv-python
 

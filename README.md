@@ -13,9 +13,14 @@ Conda
 Prerequisites
 - Anaconda/Miniconda 
 
-To create the `oro_health` conda environment, enter the following in the command prompt: 
+To create the `oro_health` conda environment, from the project directoy, enter the following in the command prompt if you have access to a GPU: 
 ```
-conda env create -f environment.yml
+conda env create -f environment.yml 
+```
+
+If you don't have access to a GPU, enter the following in the command prompt: 
+```
+conda env create -f environment_no_gpu.yml
 ```
 To active the `oro_health` conda environment, enter the following: 
 ```
