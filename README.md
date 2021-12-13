@@ -20,7 +20,7 @@ conda env create -f environment.yml
 
 If you don't have access to a GPU, enter the following in the command prompt: 
 ```
-conda env create -f environment_no_cpu.yml
+conda env create -f environment_no_gpu.yml
 ```
 To active the `oro_health` conda environment, enter the following: 
 ```
